@@ -1,9 +1,21 @@
-var express = require('express');
-var router = express.Router();
+let mongoose = require('mongoose');
+let plm = require('passport-local-mongoose');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+mongoose.connect('mongodb://localhost/YugMajor')
+.then(function(){
+  console.log('database connected')
+})
+.catch(function(e){
+  console.log(e)
+})
 
-module.exports = router;
+let UserSchema = mongoose.Schema({
+  username : String,
+  password : String,
+  email : String,
+  about: String
+})
+
+UserSchema.plugin(plm);
+
+module.exports =  mongoose.model('users', UserSchema)
