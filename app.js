@@ -6,6 +6,8 @@ var logger = require('morgan');
 let passport = require('passport');
 let expressSession = require('express-session');
 let UserModel = require('./routes/users');
+var socket_io = require("socket.io");
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -35,6 +37,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+var io           = socket_io();
+app.io           = io;
+
+
+io.on('connection', function(socketUser){
+  socketUser.on('new msg', function(msg){
+    io.emit('msg', msg);
+  })
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

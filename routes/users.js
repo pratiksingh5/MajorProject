@@ -13,7 +13,16 @@ let UserSchema = mongoose.Schema({
   username : String,
   password : String,
   email : String,
-  about: String
+  about: String,
+  city: String,
+  prfl : {
+    type: String,
+    default : '/images/goku.jpg'
+  },
+  posts  : [{
+    type : mongoose.Schema.Types.ObjectId,
+    ref : 'posts'
+  }]
 })
 
 UserSchema.plugin(plm);

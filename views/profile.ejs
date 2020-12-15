@@ -1,12 +1,11 @@
 <% include ./partials/header.ejs %>
 
+<link rel="stylesheet" href="../stylesheets/profile.css">
 <div class="flex container mt-5 pt-4 pb-4">
     <div id="left">
         <div class="profilePicFrame">
             <div id="profilePic">
-                <img class="prflpic"
-                    src=""
-                    alt="a">
+                <img class="prflpic" src="<%= userDets.prfl %>" alt="a">
             </div>
         </div>
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -35,8 +34,8 @@
             </div>
         </div>
         <div class="details p-2 pl-3 pr-3">
-            <h4>Pratik Singh</h4>
-            <h6 class="lead">Designer & Developer</h6>
+            <h4><%= userDets.username %></h4>
+            <h6 class="lead"><%=userDets.about%></h6>
            
             <div class="icns flexy">
                 <a href="#" title="Call Now" class="icon"><i class="fa fa-phone"></i></a>
@@ -54,18 +53,59 @@
                     </div>
                     <input type="submit" class="btn btn-primary" value="Post It">
                 </form>
-           
+         
+
 
             <hr>
             <div class="prevPost mt-4">
                 <h4>Previous Posts</h4>
                 <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit facilis atque exercitationem
                     magni?</small>
-              
+                <div id="posts" class="posts mt-4">
+                    <% userDets.posts.reverse().forEach(function(post){ %>
+                    <div class="post">
+                        <div class="postTop">
+                            <div class="usrPrfl">
+                                <img class="prflpic" src=<%= userDets.prfl %> alt="a">
+                            </div>
+                            <div class="postDetails">
+                                <h6><%= userDets.username %></h6>
+                                <small><% if(userDets.city === undefined) { %>
+                                    city not known
+                                <% } else { %>
+                                    <%= userDets.city %>
+                                <% } %></small>
+                            </div>
+                        </div>
+                        <p><%= post.postText %></p>
+                        <small>
+                            5 Likes,
+                            7 dislikes,
+                             2 Love Reactions
+                        </small>
+                  
+                        <div class="options">
+                        <span id="love" title="Love" class="icon">
+                            <a href=><i class="fa fa-heart"></i></a>
+                        </span>
+                        <span id="like" title="Like" class="icon">
+                            <a href=><i class="fa fa-thumbs-up"></i></a>
+                        </span>
+                        <span id="dislike" title="Dislike" class="icon">
+                            <a href=><i class="fa fa-thumbs-down"></i></a>
+                        </span>
+                    </div>
+                    </div>
+                    <% }) %>
+                    <p class="text-center"><small>No More Posts Left</small></p>
+                </div>
             </div>
         </div>
     </div>
     <div id="right">
     </div>
 </div>
+
+
+
 <% include ./partials/footer.ejs %>

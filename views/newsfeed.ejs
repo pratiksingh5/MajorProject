@@ -1,33 +1,47 @@
 <% include ./partials/header.ejs %>
-
+<link rel="stylesheet" href="../stylesheets/newsfeed.css">
 <div class="container pt-5 mt-4">
-    <h2 class="display-5">Hello, User 🤟</h2>
-    <p class="lead">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt, consequuntur quod nihil, quam
-        obcaecati iure similique atque eius et impedit nam eveniet est.</p>
+    <h2 class="display-5">Let's connect👋</h2>
+    <p class="lead">Web developer</p>
     <a href="/profile" class="btn btn-primary">I Want To Write A Post</a>
     <hr>
     <h4 class="lead">Latest Posts</h4>
     <div class="posts mt-3">
-      
-            <div class="post">
-                <div class="postTop">
-                    <div class="usrPrfl">
-                        <img class="prflpic"
-                            src=""
-                            alt="a">
-                    </div>
-                    <div class="postDetails">
-                        <a href="#"><h6>Pratik Singh</h6></a>
-                       
-                          
-                     
-                            <small>Bhopal</small>
-                      
-                    </div>
+        <% allPosts.forEach(function(post){ %>
+        <div class="post">
+            <div class="postTop">
+                <div class="usrPrfl">
+                    <img class="prflpic" src="<%= post.user.prfl %>" alt="a">
                 </div>
-                
-        
+                <div class="postDetails">
+                    <a href="#">
+                        <h6><%= post.user.username %></h6>
+                    </a>
+                    <p><%= post.postText%></p>
+                   
+
+                    <div class="options">
+                        <span id="love" title="Love" class="icon">
+                            <a href="#"><i class="fa fa-heart"></i></a>
+                        </span>
+                        <span id="like" title="Like" class="icon">
+                            <a href="#"><i class="fa fa-thumbs-up"></i></a>
+                        </span>
+                        <span id="dislike" title="Dislike" class="icon">
+                            <a href="#"><i class="fa fa-thumbs-down"></i></a>
+                        </span>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+        <%})%>
+
+
     </div>
 </div>
-
 <% include ./partials/footer.ejs %>
